@@ -1,5 +1,4 @@
 /hello_world
 /.meta*
-/bin
-/src
+/examples
 /init.sh

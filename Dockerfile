@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 COPY MIRTH_* /tmp/
 RUN apt-get update && \
@@ -8,11 +8,11 @@ RUN apt-get update && \
     git clone https://github.com/mirth-lang/mirth && \
     cd mirth && \
     git reset --hard $(cat /tmp/MIRTH_COMMIT_HASH) && \
-    make bin/mirth0 && \
-    cp bin/mirth0 /usr/local/bin/mirth && \
-    cp -r src/ /usr/local/ && \
+    make && \
+    make install && \
     cd / && \
     apt-get remove -y git make && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /opt/mirth /var/lib/apt/lists/*
+ENV PATH="/root/.mirth/bin:${PATH}"
